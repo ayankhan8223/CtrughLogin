@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "./Assets/113967-thank-you.json";
@@ -16,10 +17,16 @@ const customStyles = {
 
 function RightPart() {
   let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   function openModal() {
-    setIsOpen(true);
+    if (name && email) {
+      setIsOpen(true);
+    } else {
+      alert("please Enter name or email");
+    }
   }
 
   function afterOpenModal() {
@@ -48,12 +55,20 @@ function RightPart() {
 
         <div className="w-[100%] flex flex-col items-center mt-[50px]">
           <label class="custom-field one">
-            <input type="text" placeholder=" " />
+            <input
+              type="text"
+              placeholder=" "
+              onChange={(e) => setName(e.target.value)}
+            />
             <span class="placeholder">Enter Name</span>
           </label>
 
           <label class="custom-field one mt-[10px]">
-            <input type="text" placeholder=" " />
+            <input
+              type="text"
+              placeholder=" "
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <span class="placeholder">Enter Email</span>
           </label>
 
